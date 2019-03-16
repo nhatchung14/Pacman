@@ -23,7 +23,10 @@ public class Game extends StateBasedGame
     {
         try
         {
-            Size size=Size.getInstance();
+
+                Size size = Size.getInstance();
+
+
         	AppGameContainer myGame = new AppGameContainer(new Game(gameName));
         	myGame.setDisplayMode(size.srceen_width, size.srceen_height, false);
         	myGame.start();
