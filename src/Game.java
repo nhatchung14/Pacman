@@ -1,4 +1,3 @@
-
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
@@ -7,7 +6,6 @@ public class Game extends StateBasedGame
     public static final String gameName = "Pacman";
     public static final int menu = 0;
     public static final int play = 1;
-    
     public Game(String gameName)
     {
         super(gameName);
@@ -25,8 +23,12 @@ public class Game extends StateBasedGame
     {
         try
         {
+
+                Size size = Size.getInstance();
+
+
         	AppGameContainer myGame = new AppGameContainer(new Game(gameName));
-        	myGame.setDisplayMode(900, 720, false);
+        	myGame.setDisplayMode(size.srceen_width, size.srceen_height, false);
         	myGame.start();
         }
         catch (SlickException e)

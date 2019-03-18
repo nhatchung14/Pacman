@@ -5,6 +5,7 @@ import org.newdawn.slick.state.*;
 public class Play extends BasicGameState{
 	// creating pac 
 	Animation pac, pacUp, pacDown, pacLeft, pacRight;
+	Image map;
 	int [] pacDuration = {100, 100, 100, 100}; // expected durations for pac animations
 	float pacPosX = 0;
 	float pacPosY = 0;
@@ -19,22 +20,28 @@ public class Play extends BasicGameState{
 	
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		// pac part
-		Image[] pacWalkRight = {new Image("./image/pacman_0_0.png"), 
-							 	new Image("./image/pacman_0_1.png"), 
-							 	new Image("./image/pacman_0_2.png"), 
-							 	new Image("./image/pacman_0_3.png")};
-		Image[] pacWalkDown	 = {new Image("./image/pacman_1_0.png"), 
-			 					new Image("./image/pacman_1_1.png"), 
-			 					new Image("./image/pacman_1_2.png"), 
-			 					new Image("./image/pacman_1_3.png")};
-		Image[] pacWalkLeft = {new Image("./image/pacman_2_0.png"), 
-			 					new Image("./image/pacman_2_1.png"), 
-			 					new Image("./image/pacman_2_2.png"), 
-			 					new Image("./image/pacman_2_3.png")};
-		Image[] pacWalkUp	 = {new Image("./image/pacman_3_0.png"), 
-								new Image("./image/pacman_3_1.png"), 
-								new Image("./image/pacman_3_2.png"), 
-								new Image("./image/pacman_3_3.png")};
+        map= new Image("image/map/map.png");
+
+		Image[] pacWalkRight = {new Image("image/pacWalkRight/close_pacman.png"),
+							 	new Image("image/pacWalkRight/open_pacman.png"),
+							 	new Image("image/pacWalkRight/close_pacman.png"),
+							 	new Image("image/pacWalkRight/open_pacman.png")};
+
+		Image[] pacWalkDown	 = {new Image("image/pacWalkDown/close_pacman.png"),
+			 					new Image("image/pacWalkDown/open_pacman.png"),
+			 					new Image("image/pacWalkDown/close_pacman.png"),
+			 					new Image("image/pacWalkDown/open_pacman.png")};
+
+		Image[] pacWalkLeft = {new Image("image/pacWalkLeft/close_pacman.png"),
+			 					new Image("image/pacWalkLeft/open_pacman.png"),
+			 					new Image("image/pacWalkLeft/close_pacman.png"),
+			 					new Image("image/pacWalkLeft/open_pacman.png")};
+
+		Image[] pacWalkUp	 = {new Image("image/pacWalkUp/close_pacman.png"),
+								new Image("image/pacWalkUp/open_pacman.png"),
+								new Image("image/pacWalkUp/close_pacman.png"),
+								new Image("image/pacWalkUp/open_pacman.png")};
+
 		
 		pacUp = new Animation(pacWalkUp, pacDuration, true);
 		pacDown = new Animation(pacWalkDown, pacDuration, true);
@@ -42,7 +49,7 @@ public class Play extends BasicGameState{
 		pacRight = new Animation(pacWalkRight, pacDuration, true);
 		
 		pac = pacDown;
-		
+/*
 		// ghost part
 		Image[] ghostWalkRight = {new Image("./image/ghost_0_0.png"), 
 							 	new Image("./image/ghost_0_1.png")};
@@ -59,11 +66,14 @@ public class Play extends BasicGameState{
 		ghostRight = new Animation(ghostWalkUp, ghostDuration, true);
 		
 		ghost = ghostDown;
+		*/
 	}
 	
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
+	    map.draw(0,0);
 		pac.draw(pacPosX, pacPosY);
-		ghost.draw(ghostPosX, ghostPosY);
+
+		//ghost.draw(ghostPosX, ghostPosY);
 	}
 	
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
@@ -82,9 +92,9 @@ public class Play extends BasicGameState{
 			pac = pacLeft;
 			pacPosX -= delta * .25f;
 		}
-		if (input.isKeyDown(Input.KEY_RIGHT)) {
+		if (input.isKeyPressed(input.KEY_RIGHT)) {// just for check
 			pac = pacRight;
-			pacPosX += delta * .25f;
+			pacPosX += 50;
 		}
 		
 		// moving ghost closer (very basic)
