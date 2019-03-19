@@ -1,9 +1,11 @@
-
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
 
+import board.Size;
+
 public class Menu extends BasicGameState{
+	public Size size=Size.getInstance();
 	public Menu(int state) {
 		
 	}
@@ -13,7 +15,7 @@ public class Menu extends BasicGameState{
 	}
 	
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
-		g.fillOval(75, 100, 100, 100);
+		g.fillRect(75, 100, 100, 100);
 		g.drawString("Play!", 105, 75);
 	}
 	
@@ -22,7 +24,7 @@ public class Menu extends BasicGameState{
 		
 		int xPos = Mouse.getX();
 		int yPos = Mouse.getY();
-		if ((xPos >= 75 && xPos <= 175) && (yPos >= 520 && yPos <= 620)) {
+		if ((xPos >= 75 && xPos <= 175) && (yPos >= size.srceen_height-100-size.menu_rec_wdth && yPos <= size.srceen_height-100)) {
 			if (input.isMouseButtonDown(0)) {
 				game.enterState(1);
 			}
