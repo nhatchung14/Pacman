@@ -7,6 +7,11 @@ public class Play extends BasicGameState{
 	Image map; // the map
 
 	Pacman pac; // Pacman
+
+	Ghost ghostBlue;
+	Ghost ghostBrown;
+	Ghost ghostRed;
+	Ghost ghostYellow;
 	
 	// creating a ghost
 	Animation ghost, ghostUp, ghostDown, ghostLeft, ghostRight;
@@ -21,6 +26,12 @@ public class Play extends BasicGameState{
 
 		// pac part
         pac = new Pacman("src/image/pacman/", ".png");
+
+        //ghost part
+        ghostBlue = new Ghost("src/image/","blue",".png");
+		ghostBrown = new Ghost("src/image/","brown",".png");
+		ghostYellow = new Ghost("src/image/","brown",".png");
+		ghostRed = new Ghost("src/image/","brown",".png");
         
 /*
 		// ghost part
@@ -45,6 +56,10 @@ public class Play extends BasicGameState{
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
 	    map.draw(0,0);
 		pac.draw();
+		ghostBlue.draw();
+		ghostRed.draw();
+		ghostBrown.draw();
+		ghostYellow.draw();
 
 		//ghost.draw(ghostPosX, ghostPosY);
 	}
@@ -54,6 +69,11 @@ public class Play extends BasicGameState{
 		
 		// pac's movements
 		pac.moves(input, delta);
+
+		ghostBrown.moves(pac,delta);
+		ghostBlue.moves(pac,delta);
+		ghostRed.moves(pac,delta);
+		ghostYellow.moves(pac,delta);
 		
 		// moving ghost closer (very basic)
 		if (ghostPosX - pac.getX() > 0) 
