@@ -20,7 +20,7 @@ public class Play extends BasicGameState{
         map = new Image("image/map/map.png");
 
 		// pac part
-        pac = new Pacman("src/image/pacman/", ".png");
+        pac = new Pacman("image/pacman/", ".png");
         
 /*
 		// ghost part

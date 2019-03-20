@@ -7,8 +7,10 @@ public class Size
     // variable of type String 
     public int srceen_width=1500;
     public int srceen_height=900;
-    public int menu_rec_wdth=100;
+    public int menu_rec_wdth=300;
     public int menu_rec_height=100;
+    public int menu_rec_x=600, menu_rec_y=600;
+
     public int[][] board_matrix= new int[18][30];
     
     

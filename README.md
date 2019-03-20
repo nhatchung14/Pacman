@@ -15,3 +15,7 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 20/3/2019 Overall fixes and Pacman
 -- removal of duplicates
 -- add Pacman's collision check
+
+20/3/2019 GUI (duc)
+-- add background,logo for menu
+-- String changes color when mouse cusor is in play button
