@@ -12,6 +12,7 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 -- add singleton class "Size" to store screen,......'s value
 -- add pac image and animation
 
+
 20/3/2019 Overall fixes and Pacman
 -- removal of duplicates
 -- add Pacman's collision check
@@ -19,3 +20,10 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 20/3/2019 GUI (duc)
 -- add background,logo for menu
 -- String changes color when mouse cusor is in play button
+
+20/3/2019 Overall fixes and Pacman and Ghost (by Nhat and Luan)
+-- removal of duplicates (Nhat)
+-- add Pacman's collision check (Nhat)
+-- add Ghost class, and 4 subGhost class (Luan)
+
+
