@@ -25,13 +25,16 @@ public class Play extends BasicGameState{
         map = new Image("image/map/map.png");
 
 		// pac part
-        pac = new Pacman("src/image/pacman/", ".png");
+
+        pac = new Pacman("image/pacman/", ".png");
+
 
         //ghost part
         ghostBlue = new Ghost("src/image/","blue",".png");
 		ghostBrown = new Ghost("src/image/","brown",".png");
 		ghostYellow = new Ghost("src/image/","brown",".png");
 		ghostRed = new Ghost("src/image/","brown",".png");
+
         
 /*
 		// ghost part
