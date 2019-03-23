@@ -47,6 +47,17 @@ public class Size
             single_instance = new Size();
         return single_instance;
     }
+    
+    // return a deep copy of board_matrix 
+    public int[][] matrix_copy() {
+    	int [][] result = new int[18][30];
+    	for (int i = 0; i < 18; i++) {
+    		for (int j = 0; j < 30; j++)
+    			result[i][j] = single_instance.board_matrix[i][j];
+    	}
+    	return result;
+    }
+    
     public static void Main(String[] args) {
     	Size test = Size.getInstance();
     	
