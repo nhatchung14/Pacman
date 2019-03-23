@@ -5,6 +5,7 @@ import board.Size;
 
 public class Game extends StateBasedGame
 {
+	public static Size Board = Size.getInstance();
     public static final String gameName = "Pacman";
     public static final int menu = 0;
     public static final int play = 1;
@@ -25,9 +26,8 @@ public class Game extends StateBasedGame
     {
         try
         {
-        	Size size = Size.getInstance();
         	AppGameContainer myGame = new AppGameContainer(new Game(gameName));
-        	myGame.setDisplayMode(size.srceen_width, size.srceen_height, false);
+        	myGame.setDisplayMode(Board.srceen_width, Board.srceen_height, false);
         	myGame.start();
         }
         catch (SlickException e)

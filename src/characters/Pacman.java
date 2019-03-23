@@ -1,12 +1,9 @@
 package characters;
 
-import java.math.*;
 import org.newdawn.slick.*;
-import board.*;
+import utils.Utils;
 
-public class Pacman {
-	private Size Board;
-	
+public class Pacman {	
 	private Animation pac, pacUp, pacDown, pacLeft, pacRight;
 	private int [] pacDuration = {100, 100}; // expected durations for pac animations
 	private float pacPosX = 725;
@@ -14,9 +11,7 @@ public class Pacman {
 	
 	private int x, y;
 	
-	public Pacman(String imageDir, String extension) throws SlickException {
-		Board = Size.getInstance(); // the board
-				
+	public Pacman(String imageDir, String extension) throws SlickException {				
 		Image[] pacWalkRight = new Image[2];
 		Image[] pacWalkDown  = new Image[2];
 		Image[] pacWalkLeft  = new Image[2];
@@ -35,6 +30,17 @@ public class Pacman {
 		pac = pacRight;
 	}
 	
+	// 0 is down, 1 is right
+	// 2 is up,   3 is left
+	public int getState() {
+		if (pac == pacDown) 	  return 0;
+		else if (pac == pacRight) return 1;
+		else if (pac == pacUp)    return 2;
+		else if (pac == pacLeft)  return 3;
+		
+		return -1; // bugged
+	}
+	
 	public void moves(Input input, int delta) {
 		// pac's movements
 		if (input.isKeyDown(Input.KEY_UP)) {
@@ -42,7 +48,9 @@ public class Pacman {
 			
 			y = (int) ((pacPosY - delta * 0.25f)/50.0f); // next y position
 			x = (int) ((pacPosX)/50.0f);
-			if (pacPosY > 0 && y >= 0 && Board.board_matrix[y][x] != -1) {
+			
+			// if Pacman's next expected position is out of bounds or blocked 
+			if (pacPosY > 0 && y >= 0 && !Utils.isBlocked(y, x)) {
 				pacPosY -= delta * .25f;
 			}
 		}
@@ -51,7 +59,9 @@ public class Pacman {
 			
 			y = (int) ((pacPosY + delta * 0.25f)/50.0f);  // next y position
 			x = (int) ((pacPosX)/50.0f);
-			if (pacPosY < 850 && y < 18 && Board.board_matrix[y][x] != -1) {
+			
+			// if Pacman's next expected position is out of bounds or blocked
+			if (pacPosY < 850 && y < 18 && !Utils.isBlocked(y, x)) {
 				pacPosY += delta * .25f;
 			}
 		}
@@ -60,7 +70,9 @@ public class Pacman {
 			
 			y = (int) ((pacPosY)/50.0f);
 			x = (int) ((pacPosX - delta * 0.25f)/50.0f); // next x position
-			if (pacPosX > 0 && x >= 0 && Board.board_matrix[y][x] != -1) {
+			
+			// if Pacman's next expected position is out of bounds or blocked
+			if (pacPosX > 0 && x >= 0 && !Utils.isBlocked(y, x)) {
 				pacPosX -= delta * .25f;
 			}
 		}
@@ -69,7 +81,9 @@ public class Pacman {
 			
 			y = (int) ((pacPosY)/50.0f);
 			x = (int) ((pacPosX + delta * 0.25f)/50.0f); // next x position
-			if (pacPosX < 1500 && x < 30 && Board.board_matrix[y][x] != -1) {
+			
+			// if Pacman's next expected position is out of bounds or blocked
+			if (pacPosX < 1500 && x < 30 && !Utils.isBlocked(y, x)) {
 				pacPosX += delta * .25f;
 			}
 		}
