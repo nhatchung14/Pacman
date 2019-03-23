@@ -20,3 +20,8 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 20/3/2019 GUI (duc)
 + add background,logo for menu
 + String changes color when mouse cusor is in play button
+
+23/3/2019 (Nhat)
++ Added ghosts' behaviors. 
++ Added utils package for useful functions/classes.  
++ Added comments on Pacman class for clarity.
