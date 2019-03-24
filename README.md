@@ -25,3 +25,6 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 + Added ghosts' behaviors. 
 + Added utils package for useful functions/classes.  
 + Added comments on Pacman class for clarity.
+
+24/3/2019 (Luan)
++ Add scared mode for Ghost, but still need some update on move because when they scared they will move away from pacman
