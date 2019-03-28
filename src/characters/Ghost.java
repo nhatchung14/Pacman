@@ -8,35 +8,37 @@ public class Ghost {
 	private float ghostPosX;
 	private float ghostPosY;
 
-	public long vulnerableModeStartTime;
-	public boolean markAsVulnerable;
-	public boolean pacmanEatFood = true;
+	public long vulnerableModeStartTime; // vulnerable start time
+	public boolean markAsVulnerable; // check vulnerable
+	public boolean pacmanEatFood = true; // just temporary wait pacman eat food mode
 
-	public static enum Mode {NORMAL, VULNERABLE, DIED }
-	public Mode mode = Mode.NORMAL;
+	public static enum Mode {NORMAL, VULNERABLE, DIED } // 3 MODE
+	public Mode mode = Mode.NORMAL; // initialize mode normal
 
 
 	public Ghost(String imageDir, String color, String extension, float inY, float inX) throws SlickException {
 
-		startGhostVulnerable(imageDir,color,extension);
-		updateGhostVulnerable(imageDir,color,extension);
+		// just test this 2 function
+//		startGhostVulnerable(imageDir,color,extension);
+//		updateGhostVulnerable(imageDir,color,extension);
 
-//		Image [] ghostWalkRight = new Image[2];
-//		Image [] ghostWalkDown = new Image[2];
-//		Image [] ghostWalkLeft = new Image[2];
-//		Image [] ghostWalkUp = new Image[2];
-//
-//		for (int img = 0; img < 2; img++)	{
-//			ghostWalkRight[img] = new Image(imageDir + color + "-ghost/lookright" + extension);
-//			ghostWalkDown[img]  = new Image(imageDir + color + "-ghost/lookdown" + extension);
-//			ghostWalkLeft[img]  = new Image(imageDir + color + "-ghost/lookleft" + extension);
-//			ghostWalkUp[img]    = new Image(imageDir + color + "-ghost/lookup" + extension);
-//		}
-//
-//		ghostUp = new Animation(ghostWalkUp, ghostDuration, true);
-//		ghostDown = new Animation(ghostWalkDown, ghostDuration, true);
-//		ghostLeft = new Animation(ghostWalkLeft, ghostDuration, true);
-//		ghostRight = new Animation(ghostWalkRight, ghostDuration, true);
+		// Ghost normal image part
+		Image [] ghostWalkRight = new Image[2];
+		Image [] ghostWalkDown = new Image[2];
+		Image [] ghostWalkLeft = new Image[2];
+		Image [] ghostWalkUp = new Image[2];
+
+		for (int img = 0; img < 2; img++)	{
+			ghostWalkRight[img] = new Image(imageDir + color + "-ghost/lookright" + extension);
+			ghostWalkDown[img]  = new Image(imageDir + color + "-ghost/lookdown" + extension);
+			ghostWalkLeft[img]  = new Image(imageDir + color + "-ghost/lookleft" + extension);
+			ghostWalkUp[img]    = new Image(imageDir + color + "-ghost/lookup" + extension);
+		}
+
+		ghostUp = new Animation(ghostWalkUp, ghostDuration, true);
+		ghostDown = new Animation(ghostWalkDown, ghostDuration, true);
+		ghostLeft = new Animation(ghostWalkLeft, ghostDuration, true);
+		ghostRight = new Animation(ghostWalkRight, ghostDuration, true);
 
 		ghost = ghostDown;
 
@@ -82,12 +84,16 @@ public class Ghost {
 	// NEED TO LINK WITH PACMAN CLASS OR FOOD CLASS
 	// pacmanEatFood is just temp
 
+	// Method Start Ghost vulnerable
+
 	public void startGhostVulnerable(String imageDir, String color, String extension) throws SlickException {
 
 
 		if (pacmanEatFood){
-			vulnerableModeStartTime = System.currentTimeMillis();
-			markAsVulnerable = true;
+			vulnerableModeStartTime = System.currentTimeMillis(); // Start Vulnerable
+			markAsVulnerable = true; // mark as true if pacman eat big food
+
+			// Change image to scared image
 
 			Image [] scaredGhostWalkRight = new Image[2];
 			Image [] scaredGhostWalkDown = new Image[2];
@@ -109,7 +115,7 @@ public class Ghost {
 			if (checkedCollidePacman()){    // is pacman collide with ghost in scare mode -> ghost die
 				ghostDied();
 			}
-
+// Call method scare move when pacman eat big food
 			ghostScaredMove();
 		}
 	}
@@ -120,11 +126,14 @@ public class Ghost {
 
 	// after 5 secs ghost become normal
 
+	// Method update vulnerable mode
 	public void updateGhostVulnerable(String imageDir, String color, String extension) throws SlickException{
 
 		if (!checkGhostVulnerable()){
 			markAsVulnerable = false;
 			setMode(Mode.NORMAL);
+
+			// image of ghost set back to normal
 
 			Image [] ghostWalkRight = new Image[2];
 			Image [] ghostWalkDown = new Image[2];
