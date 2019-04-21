@@ -15,17 +15,17 @@ public class Menu extends BasicGameState{
 	public TrueTypeFont font;
 
 	public Menu(int state) {
-		
+
 	}
-	
+
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
 		background= new Image("image/menu/background.png");
 		rec= new org.newdawn.slick.geom.Rectangle(Board.menu_rec_x, Board.menu_rec_y, Board.menu_rec_wdth, Board.menu_rec_height);
-		font =  new TrueTypeFont(new Font("Helvetica", Font.PLAIN, 30),true);
+		font =  new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
 		title=new Image("image/menu/title.png");
 		paclogo=new Image("image/menu/paclogo.png");
 	}
-	
+
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
 		background.draw(0,0);
 		title.draw(450,50);
@@ -41,20 +41,20 @@ public class Menu extends BasicGameState{
 		int xPos = Mouse.getX();
 		int yPos = Mouse.getY();
 		if ((xPos >= Board.menu_rec_x && xPos <= Board.menu_rec_wdth+Board.menu_rec_x) && (yPos >= Board.srceen_height-Board.menu_rec_y-Board.menu_rec_wdth && yPos <= Board.srceen_height-Board.menu_rec_y)) {
-			g.setColor(Color.yellow);
-			g.drawString(button, Board.menu_rec_x+120, Board.menu_rec_y+25);
+			g.setColor(Color.red);
+			g.drawString(button, Board.menu_rec_x+110, Board.menu_rec_y+25);
 		}
 		else
 		{
 			g.setColor(Color.white);
-			g.drawString(button, Board.menu_rec_x+120, Board.menu_rec_y+25);
+			g.drawString(button, Board.menu_rec_x+110, Board.menu_rec_y+25);
 		}
 	}
 
-	
+
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		Input input = gc.getInput();
-		
+
 		int xPos = Mouse.getX();
 		int yPos = Mouse.getY();
 		if ((xPos >= Board.menu_rec_x && xPos <= Board.menu_rec_wdth+Board.menu_rec_x) && (yPos >= Board.srceen_height-Board.menu_rec_y-Board.menu_rec_wdth && yPos <= Board.srceen_height-Board.menu_rec_y)) {
@@ -64,7 +64,7 @@ public class Menu extends BasicGameState{
 			}
 		}
 	}
-	
+
 	public int getID() {
 		return 0;
 	}
