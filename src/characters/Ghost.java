@@ -48,24 +48,24 @@ public class Ghost {
 	}
 
 	public void moves(Pacman pac, int delta) {
-		// moving ghost closer (very basic)
-		if (ghostPosX - pac.getX() > 0) {
-			ghostPosX -= delta * .1f;
-			ghost = ghostLeft;
-		}
-		else if (ghostPosX - pac.getX() < 0) {
-			ghostPosX += delta * .1f;
-			ghost = ghostRight;
-		}
-
-		if (ghostPosY - pac.getY() > 0) {
-			ghostPosY -= delta * .1f;
-			ghost = ghostUp;
-		}
-		else if (ghostPosY - pac.getY() < 0) {
-			ghostPosY += delta * .1f;
-			ghost = ghostDown;
-		}
+//		// moving ghost closer (very basic)
+//		if (ghostPosX - pac.getX() > 0) {
+//			ghostPosX -= delta * .1f;
+//			ghost = ghostLeft;
+//		}
+//		else if (ghostPosX - pac.getX() < 0) {
+//			ghostPosX += delta * .1f;
+//			ghost = ghostRight;
+//		}
+//
+//		if (ghostPosY - pac.getY() > 0) {
+//			ghostPosY -= delta * .1f;
+//			ghost = ghostUp;
+//		}
+//		else if (ghostPosY - pac.getY() < 0) {
+//			ghostPosY += delta * .1f;
+//			ghost = ghostDown;
+//		}
 	}
 
 	public void draw() {
@@ -112,9 +112,10 @@ public class Ghost {
 			ghostLeft = new Animation(scaredGhostWalkLeft, ghostDuration, true);
 			ghostRight = new Animation(scaredGhostWalkRight, ghostDuration, true);
 
-			if (checkedCollidePacman()){    // is pacman collide with ghost in scare mode -> ghost die
-				ghostDied();
-			}
+//			if (checkedCollidePacman()){    // is pacman collide with ghost in scare mode -> ghost die
+//				ghostDied();
+//			}
+
 // Call method scare move when pacman eat big food
 			ghostScaredMove();
 		}
@@ -155,13 +156,6 @@ public class Ghost {
 		}
 	}
 
-	// when pacman collide with ghost, but need add something in this method
-	public boolean checkedCollidePacman(){
-
-		boolean isCollide = true;
-
-		return isCollide;
-	}
 
 
 	public void ghostDied(){
