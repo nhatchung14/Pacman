@@ -28,3 +28,5 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 
 24/3/2019 (Luan)
 + Add scared mode for Ghost, but still need some update on move because when they scared they will move away from pacman
+25/4/2019 (Luan)
++ Add class Food and display them on the game console, also add check pacman eat food to PLay class
