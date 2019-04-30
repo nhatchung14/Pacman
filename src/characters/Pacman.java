@@ -9,6 +9,7 @@ public class Pacman {
 	private int [] pacDuration = {100, 100}; // expected durations for pac animations
 	private float pacPosX = 725;
 	private float pacPosY = 75;
+	public int score=110;
 
 
 	private int x, y;
@@ -99,4 +100,5 @@ public class Pacman {
 
 	public float getX() { return pacPosX; }
 	public float getY() { return pacPosY; }
+
 }
