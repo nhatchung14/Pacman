@@ -1,11 +1,18 @@
 import board.Size;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
+import org.newdawn.slick.Color;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.*;
 import characters.*;
 import utils.GhostFactory;
+
+import java.awt.*;
 import java.awt.Font;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 public class Play extends BasicGameState{
 	Image map; // the map
@@ -22,16 +29,24 @@ public class Play extends BasicGameState{
 	//exit window;
 	public Shape menubutton,exitbutton;
 	public Size Board=Size.getInstance();
-	public TrueTypeFont font;
+	public TrueTypeFont exitfont,scorefont;
 	Image gameover;
-	public String menu="Menu",exit="Exit";
+	public String menu="Menu",exit="Exit",score="";
 
 	// set inital out side screen
 	public int gameoverX=2000,gameoverY=2000;
 
 	public Play(int state) {}
+/*
+	public  Font importfont() throws Exception{
 
-	public void init(GameContainer gc, StateBasedGame game) throws SlickException {
+        InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("roboto-bold.ttf");
+        Font font = Font.createFont(Font.TRUETYPE_FONT, stream).deriveFont(48f);
+        scorefont = new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
+
+    }
+*/
+	public void init(GameContainer gc, StateBasedGame game) throws SlickException  {
 		map = new Image("image/map/map.png");
 
 		food = new Food();
@@ -48,7 +63,9 @@ public class Play extends BasicGameState{
 		// exit window
 		exitbutton=new org.newdawn.slick.geom.Rectangle(Board.exit_buttonX, Board.exit_buttonY, Board.exit_button_width, Board.exit_button_height);
 		menubutton= new org.newdawn.slick.geom.Rectangle(Board.exit_menu_buttonX, Board.exit_menu_buttonY, Board.exit_button_width, Board.exit_button_height);
-		font =  new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
+		exitfont =  new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
+
+		scorefont = new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
 		gameover= new Image("image/gameover/gameover.png");
 	}
 
@@ -65,9 +82,14 @@ public class Play extends BasicGameState{
 		ghostBrown.draw();
 		ghostYellow.draw();
 
+		// score
+        g.setColor(Color.white);
+        g.setFont(scorefont);
+        g.drawString(score+pac.score,1430,8);
 		//exit
-		gameover.draw(gameoverX,gameoverY);
+
 		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)){
+            gameover.draw(gameoverX,gameoverY);
 			g.setColor(Color.black);
 			g.fill(menubutton);
 			g.fill(exitbutton);
@@ -75,7 +97,7 @@ public class Play extends BasicGameState{
 			g.setColor(Color.red);
 			g.draw(menubutton);
 			g.draw(exitbutton);
-			g.setFont(font);
+			g.setFont(exitfont);
 			int xPos = Mouse.getX();
 			int yPos = Mouse.getY();
 			// menu button
@@ -98,6 +120,7 @@ public class Play extends BasicGameState{
 				g.setColor(Color.white);
 				g.drawString(exit, Board.exit_buttonX+100, Board.exit_buttonY+25);
 			}
+            g.setColor(Color.white);
 		}
 	}
 
@@ -112,6 +135,7 @@ public class Play extends BasicGameState{
 			//check click on menu
 			if ((xPos >= Board.exit_menu_buttonX && xPos <= Board.exit_menu_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_menu_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_menu_buttonY)) {
 				if (input.isMouseButtonDown(0)) {
+					game.getState(1).init(gc,game);
 					game.enterState(0);
 				}
 			}
