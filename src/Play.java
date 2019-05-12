@@ -60,11 +60,10 @@ public class Play extends BasicGameState{
 		ghostBrown 	= GhostFactory.newGhost("image/","brown",	".png", 210, 1331);
 
 
-		// exit window
+		// declare exit window with 2 button, draw outside first if collie then change pos to inside screen
 		exitbutton=new org.newdawn.slick.geom.Rectangle(Board.exit_buttonX, Board.exit_buttonY, Board.exit_button_width, Board.exit_button_height);
 		menubutton= new org.newdawn.slick.geom.Rectangle(Board.exit_menu_buttonX, Board.exit_menu_buttonY, Board.exit_button_width, Board.exit_button_height);
 		exitfont =  new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
-
 		scorefont = new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
 		gameover= new Image("image/gameover/gameover.png");
 	}
@@ -88,46 +87,14 @@ public class Play extends BasicGameState{
         g.drawString(score+pac.score,1430,8);
 		//exit
 
-		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)){
-            gameover.draw(gameoverX,gameoverY);
-			g.setColor(Color.black);
-			g.fill(menubutton);
-			g.fill(exitbutton);
-			g.setLineWidth(20);
-			g.setColor(Color.red);
-			g.draw(menubutton);
-			g.draw(exitbutton);
-			g.setFont(exitfont);
-			int xPos = Mouse.getX();
-			int yPos = Mouse.getY();
-			// menu button
-			if ((xPos >= Board.exit_menu_buttonX && xPos <= Board.exit_menu_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_menu_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_menu_buttonY)) {
-				g.setColor(Color.red);
-				g.drawString(menu, Board.exit_menu_buttonX+100, Board.exit_menu_buttonY+25);
-			}
-			else
-			{
-				g.setColor(Color.white);
-				g.drawString(menu, Board.exit_menu_buttonX+100, Board.exit_menu_buttonY+25);
-			}
-			//exit button
-			if ((xPos >= Board.exit_buttonX && xPos <= Board.exit_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_buttonY)) {
-				g.setColor(Color.red);
-				g.drawString(exit, Board.exit_buttonX+100, Board.exit_buttonY+25);
-			}
-			else
-			{
-				g.setColor(Color.white);
-				g.drawString(exit, Board.exit_buttonX+100, Board.exit_buttonY+25);
-			}
-            g.setColor(Color.white);
-		}
+		drawexit(g);
 	}
 
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		Input input = gc.getInput();
 		// check pos before move
 		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)){
+			// check pac pos vs ghost pos, if true draw exit in the screen
 			gameoverX=Board.exit_title_x;
 			gameoverY=Board.exit_title_y;
 			int xPos = Mouse.getX();
@@ -135,17 +102,18 @@ public class Play extends BasicGameState{
 			//check click on menu
 			if ((xPos >= Board.exit_menu_buttonX && xPos <= Board.exit_menu_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_menu_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_menu_buttonY)) {
 				if (input.isMouseButtonDown(0)) {
-					game.getState(1).init(gc,game);
+					game.getState(1).init(gc,game); // reset state
 					game.enterState(0);
 				}
 			}
 			//check click exit
 			if ((xPos >= Board.exit_buttonX && xPos <= Board.exit_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_buttonY)) {
 				if (input.isMouseButtonDown(0)) {
-					gc.exit();
+					gc.exit(); // exit game
 				}
 			}
 		}
+		// continue moving
 		else{
 			// pac's movements
 			pac.moves(input, delta);
@@ -161,9 +129,48 @@ public class Play extends BasicGameState{
 		if (checkedCollidePacman(pac, ghostBrown) ||checkedCollidePacman(pac, ghostBlue) || checkedCollidePacman(pac, ghostRed)||checkedCollidePacman(pac, ghostYellow)){
 			return true;
 		}
+
 		return false;
 	}
-
+	public void drawexit(Graphics g){
+		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)){
+			gameover.draw(gameoverX,gameoverY);
+			g.setColor(Color.black);
+			g.fill(menubutton); //fill background of "menubutton" rec = black
+			g.fill(exitbutton);	//fill background of "exitbutton" rec = black
+			g.setLineWidth(20);
+			g.setColor(Color.red);
+			g.draw(menubutton);	//draw "menubutton" rec + red linewidth
+			g.draw(exitbutton);	//draw "exitbutton" rec + red linewidth
+			g.setFont(exitfont);
+			int xPos = Mouse.getX();
+			int yPos = Mouse.getY();
+			// menu button
+			if ((xPos >= Board.exit_menu_buttonX && xPos <= Board.exit_menu_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_menu_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_menu_buttonY)) {
+				g.setColor(Color.red); // if mouse cusor in rec String "menu" = red
+				g.drawString(menu, Board.exit_menu_buttonX+100, Board.exit_menu_buttonY+25);
+			}
+			else
+			{
+				g.setColor(Color.white); // if mouse cusor not in rec String "menu" = white
+				g.drawString(menu, Board.exit_menu_buttonX+100, Board.exit_menu_buttonY+25);
+				// draw "menu" String in the middle of rec
+			}
+			//exit button
+			if ((xPos >= Board.exit_buttonX && xPos <= Board.exit_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_buttonY)) {
+				g.setColor(Color.red);
+				g.drawString(exit, Board.exit_buttonX+100, Board.exit_buttonY+25);
+			}
+			else
+			{
+				g.setColor(Color.white);
+				g.drawString(exit, Board.exit_buttonX+100, Board.exit_buttonY+25);
+				// draw "exit" String in the middle of rec
+			}
+			g.setColor(Color.white);
+				// set font color back to white as default
+		}
+	}
 	// when pacman collide with ghost, but need add something in this method
 	public boolean checkedCollidePacman(Pacman pac, Ghost ghost){
 		boolean isCollide = false;
