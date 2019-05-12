@@ -32,3 +32,9 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 
 25/4/2019 (Luan)
 + Add class Food and display them on the game console, also add check pacman eat food to PLay class
+
+30/4/2019 (duc)
++ debug exit screen and add basic score
+
+12/5/2019 (duc)
++ add comment to code
