@@ -7,6 +7,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.*;
 import characters.*;
+import utils.Food;
 import utils.GhostFactory;
 
 import java.awt.*;
@@ -18,8 +19,6 @@ public class Play extends BasicGameState{
 	Image map; // the map
 
 	Pacman pac; // Pacman
-
-	Food food; // Food
 
 	Ghost ghostBlue;
 	Ghost ghostBrown;
@@ -49,7 +48,6 @@ public class Play extends BasicGameState{
 	public void init(GameContainer gc, StateBasedGame game) throws SlickException  {
 		map = new Image("image/map/map.png");
 
-		food = new Food();
 		// pac part
 		pac = new Pacman("image/pacman/", ".png");
 
@@ -74,7 +72,8 @@ public class Play extends BasicGameState{
 		pac.draw();
 
 		// draw food
-		food.drawFood();
+		Food.drawFood(pac.getX(), pac.getY());
+		
 		// draw ghost
 		ghostBlue.draw();
 		ghostRed.draw();

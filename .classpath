@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Slick2D">
+		<attributes>
+			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="D:/#Workspace [Java]/lwjgl-2.9.3/native/windows"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="libs/jar/ibxm.jar"/>
+	<classpathentry kind="lib" path="libs/jar/jinput.jar"/>
+	<classpathentry kind="lib" path="libs/jar/jnlp.jar"/>
+	<classpathentry kind="lib" path="libs/jar/jogg-0.0.7.jar"/>
+	<classpathentry kind="lib" path="libs/jar/jorbis-0.0.15.jar"/>
+	<classpathentry kind="lib" path="libs/jar/lwjgl_util_applet.jar"/>
+	<classpathentry kind="lib" path="libs/jar/lwjgl_util.jar"/>
+	<classpathentry kind="lib" path="libs/jar/lwjgl.jar"/>
+	<classpathentry kind="lib" path="libs/jar/natives-linux.jar"/>
+	<classpathentry kind="lib" path="libs/jar/natives-mac.jar"/>
+	<classpathentry kind="lib" path="libs/jar/natives-windows.jar"/>
+	<classpathentry kind="lib" path="libs/jar/slick-examples.jar"/>
+	<classpathentry kind="lib" path="libs/jar/slick.jar"/>
+	<classpathentry kind="lib" path="libs/jar/tinylinepp.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

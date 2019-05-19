@@ -23,7 +23,16 @@ public class Size {
 
     // private constructor restricted to this class itself
     private Size() {
-        // blockages
+        refresh();
+    }
+    
+    public void refresh() {
+    	for (int i = 0; i < 18; i++) {
+    		for (int j = 0; j < 30; j++)
+    			board_matrix[i][j] = 0;
+    	}
+    	
+    	// blockages
         board_matrix[0][0] = board_matrix[0][1] = board_matrix[0][2] = board_matrix[0][3] = board_matrix[0][4] = board_matrix[0][5] = board_matrix[0][6] = board_matrix[0][7] = board_matrix[0][8] = board_matrix[0][9] = board_matrix[0][10] = board_matrix[0][11] = board_matrix[0][12] = board_matrix[0][13] = board_matrix[0][15] = board_matrix[0][16] = board_matrix[0][17] = board_matrix[0][18] = board_matrix[0][19] = board_matrix[0][20] = board_matrix[0][21] = board_matrix[0][22] = board_matrix[0][23] = board_matrix[0][24] = board_matrix[0][25] = board_matrix[0][26] = board_matrix[0][27] = board_matrix[0][28] = board_matrix[0][29] =
                 board_matrix[1][0] = board_matrix[1][4] = board_matrix[1][6] = board_matrix[1][7] = board_matrix[1][9] = board_matrix[1][19] = board_matrix[1][23] = board_matrix[1][25] = board_matrix[1][29] =
                         board_matrix[2][0] = board_matrix[2][2] = board_matrix[2][6] = board_matrix[2][9] = board_matrix[2][11] = board_matrix[2][12] = board_matrix[2][13] = board_matrix[2][15] = board_matrix[2][16] = board_matrix[2][27] = board_matrix[2][28] = board_matrix[2][29] =
@@ -44,7 +53,7 @@ public class Size {
                                                                                                                                                 board_matrix[17][0] = board_matrix[17][1] = board_matrix[17][2] = board_matrix[17][3] = board_matrix[17][4] = board_matrix[17][5] = board_matrix[17][6] = board_matrix[17][7] = board_matrix[17][8] = board_matrix[17][9] = board_matrix[17][10] = board_matrix[17][11] = board_matrix[17][12] = board_matrix[17][13] = board_matrix[17][14] = board_matrix[17][15] = board_matrix[17][16] = board_matrix[17][17] = board_matrix[17][19] = board_matrix[17][20] = board_matrix[17][21] = board_matrix[17][22] = board_matrix[17][23] = board_matrix[17][24] = board_matrix[17][25] = board_matrix[17][26] = board_matrix[17][27] = board_matrix[17][28] = board_matrix[17][29] =
                                                                                                                                                         -1;
     }
-
+    
     // static method to create instance of Singleton class
     public static Size getInstance() {
         if (single_instance == null)
@@ -52,18 +61,21 @@ public class Size {
         return single_instance;
     }
 
-    // return a deep copy of board_matrix
+    // return a deep binary copy of board_matrix
     public int[][] matrix_copy() {
         int[][] result = new int[18][30];
         for (int i = 0; i < 18; i++) {
-            for (int j = 0; j < 30; j++)
-                result[i][j] = single_instance.board_matrix[i][j];
+            for (int j = 0; j < 30; j++) {
+                result[i][j] = board_matrix[i][j];
+                if (result[i][j] > 0) 
+                	result[i][j] = 0;
+            }
         }
         return result;
     }
-
-    public static void Main(String[] args) {
-        Size test = Size.getInstance();
-
+    
+    public void setPositionVal(int i, int j, int val) {
+    	board_matrix[i][j] = val;
     }
+    
 }

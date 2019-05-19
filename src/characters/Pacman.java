@@ -1,6 +1,5 @@
 package characters;
 
-import board.Size;
 import org.newdawn.slick.*;
 import utils.Utils;
 

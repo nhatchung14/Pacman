@@ -60,6 +60,7 @@ public class Menu extends BasicGameState{
 		if ((xPos >= Board.menu_rec_x && xPos <= Board.menu_rec_wdth+Board.menu_rec_x) && (yPos >= Board.srceen_height-Board.menu_rec_y-Board.menu_rec_wdth && yPos <= Board.srceen_height-Board.menu_rec_y)) {
 
 			if (input.isMouseButtonDown(0)) {
+				Board.refresh();
 				game.enterState(1);
 			}
 		}
