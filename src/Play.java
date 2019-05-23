@@ -72,7 +72,7 @@ public class Play extends BasicGameState{
 		pac.draw();
 
 		// draw food
-		Food.drawFood(pac.getX(), pac.getY());
+		Food.drawFood(pac.getX(), pac.getY(), pac);
 		
 		// draw ghost
 		ghostBlue.draw();
