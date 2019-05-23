@@ -10,7 +10,7 @@ public class Food {
     public static void drawFood(float x, float y) throws SlickException {
     	int norm_x = (int) (x / 50.0f);
     	int norm_y = (int) (y / 50.0f);
-    	Size.getInstance().setPositionVal( norm_y, norm_x, 1);
+    	Size.getInstance().setPositionVal( norm_y, norm_x, 1, pacman);
     	
         Image food = new Image("image/food/food.png");
         for (int i = 0; i < 18;i++){
