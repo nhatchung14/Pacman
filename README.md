@@ -38,3 +38,5 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 
 12/5/2019 (duc)
 + add comment to code
+23/5/2019 (luan)
++ add score when pacman eat food
