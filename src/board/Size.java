@@ -75,7 +75,10 @@ public class Size {
     }
     
     public void setPositionVal(int i, int j, int val) {
-    	board_matrix[i][j] = val;
+    	  // if at that pos, the val != 1 which mean pacman eat food, and add score 25
+        if(board_matrix[i][j] != val)
+    	    pacman.score += 25;
+        board_matrix[i][j] = val;
     }
     
 }
