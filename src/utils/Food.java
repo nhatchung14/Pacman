@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 public class Food {
 
     // Draw food func
-    public static void drawFood(float x, float y) throws SlickException {
+    public static void drawFood(float x, float y, Pacman pacman) throws SlickException {
     	int norm_x = (int) (x / 50.0f);
     	int norm_y = (int) (y / 50.0f);
     	Size.getInstance().setPositionVal( norm_y, norm_x, 1, pacman);
