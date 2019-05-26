@@ -41,3 +41,10 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 
 23/5/2019 (luan)
 + add score when pacman eat food
+
+26/5/2019 (duc)
++ adds basic UML
++ debug pac moves half into wall
++ increase size of score's string
+
+

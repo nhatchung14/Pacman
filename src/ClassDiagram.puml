@@ -1,0 +1,24 @@
+@startuml
+
+Ghost <|-- BlueGhost
+Ghost <|-- RedGhost
+Ghost <|-- BrownGhost
+Ghost <|-- YellowGhost
+
+Play *-- Size
+Play *-- Ghost
+Play *-- Pacman
+Pacman *-- Food
+
+
+
+class Food{
+}
+class Play{
+}
+class Size{
+}
+class Ghost{
+-int PoxX,PosY
+}
+@enduml
