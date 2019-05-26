@@ -1,6 +1,7 @@
 package utils;
 
 import board.Size;
+import characters.Pacman;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 

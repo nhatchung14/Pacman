@@ -1,5 +1,7 @@
 package board;
 
+import characters.Pacman;
+
 public class Size {
     // static variable single_instance of type Singleton
     private static Size single_instance = null;

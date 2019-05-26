@@ -62,7 +62,7 @@ public class Play extends BasicGameState{
 		exitbutton=new org.newdawn.slick.geom.Rectangle(Board.exit_buttonX, Board.exit_buttonY, Board.exit_button_width, Board.exit_button_height);
 		menubutton= new org.newdawn.slick.geom.Rectangle(Board.exit_menu_buttonX, Board.exit_menu_buttonY, Board.exit_button_width, Board.exit_button_height);
 		exitfont =  new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
-		scorefont = new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
+		scorefont = new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 35),true);
 		gameover= new Image("image/gameover/gameover.png");
 	}
 
@@ -83,7 +83,7 @@ public class Play extends BasicGameState{
 		// score
         g.setColor(Color.white);
         g.setFont(scorefont);
-        g.drawString(score+pac.score,1430,8);
+        g.drawString(score+pac.score,1420,8);
 		//exit
 
 		drawexit(g);
@@ -174,20 +174,13 @@ public class Play extends BasicGameState{
 	public boolean checkedCollidePacman(Pacman pac, Ghost ghost){
 		boolean isCollide = false;
 
-		if (Math.abs(pac.getX() - ghost.getX()) <= 50 && Math.abs(pac.getY() - ghost.getY()) <= 50){
+		if (Math.abs(pac.getX() - ghost.getX()) <= 40 && Math.abs(pac.getY() - ghost.getY()) <= 40){
 			isCollide = true;
 		}
 		return isCollide;
 	}
 	// Check eat food
-	public boolean checkedEatFood(Pacman pac, Food food){
-		boolean isCollide = false;
 
-		if (Math.abs(pac.getX() - food.getFoodPosX()) == 0 && Math.abs(pac.getY() - food.getFoodPosY()) == 0){
-			isCollide = true;
-		}
-		return isCollide;
-	}
 
 
 	public int getID() {
