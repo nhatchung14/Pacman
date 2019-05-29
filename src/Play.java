@@ -16,7 +16,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class Play extends BasicGameState{
-	Image map; // the map
+	Image map,win_img; // the map
 
 	Pacman pac; // Pacman
 
@@ -26,11 +26,11 @@ public class Play extends BasicGameState{
 	Ghost ghostYellow;
 
 	//exit window;
-	public Shape menubutton,exitbutton;
+	public Shape menubutton,exitbutton,winbutton;
 	public Size Board=Size.getInstance();
 	public TrueTypeFont exitfont,scorefont;
 	Image gameover;
-	public String menu="Menu",exit="Exit",score="";
+	public String menu="Menu",exit="Exit",score="",win="Win";
 
 	// set inital out side screen
 	public int gameoverX=2000,gameoverY=2000;
@@ -64,6 +64,11 @@ public class Play extends BasicGameState{
 		exitfont =  new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 30),true);
 		scorefont = new TrueTypeFont(new Font("Trajan Pro", Font.PLAIN, 35),true);
 		gameover= new Image("image/gameover/gameover.png");
+		pac.life= new Image("image/heart/heart.png");
+
+		// declare win img and 1 button
+		win_img= new Image("image/win/win.jpg");
+		winbutton=new org.newdawn.slick.geom.Rectangle(Board.win_buttonX, Board.win_buttonY, Board.win_button_width, Board.win_button_height);
 	}
 
 	public void render(GameContainer gc, StateBasedGame game, Graphics g) throws SlickException {
@@ -84,36 +89,60 @@ public class Play extends BasicGameState{
         g.setColor(Color.white);
         g.setFont(scorefont);
         g.drawString(score+pac.score,1420,8);
-		//exit
-
+        // check life to draw heart
+        for(int i=1;i<=pac.lives;i++){
+            pac.life.draw(25+(i-1)*25,10);
+        }
+        // draw win outside screen
+        drawwin(g);
+		//  draw exit outside screen
 		drawexit(g);
 	}
 
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		Input input = gc.getInput();
 		// check pos before move
-		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)){
-			// check pac pos vs ghost pos, if true draw exit in the screen
-			gameoverX=Board.exit_title_x;
-			gameoverY=Board.exit_title_y;
-			int xPos = Mouse.getX();
-			int yPos = Mouse.getY();
-			//check click on menu
-			if ((xPos >= Board.exit_menu_buttonX && xPos <= Board.exit_menu_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_menu_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_menu_buttonY)) {
-				if (input.isMouseButtonDown(0)) {
-					game.getState(1).init(gc,game); // reset state
-					game.enterState(0);
+		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)) {
+			// check pac's lives first
+			if (pac.lives!=0) {
+			pac.lives--;
+			// set to initial place
+			pac.anotherlife();
+			} else {
+				// check pac pos vs ghost pos, if true draw exit in the screen
+				gameoverX = Board.exit_title_x;
+				gameoverY = Board.exit_title_y;
+				int xPos = Mouse.getX();
+				int yPos = Mouse.getY();
+				//check click on menu
+				if ((xPos >= Board.exit_menu_buttonX && xPos <= Board.exit_menu_buttonX + Board.exit_button_width) && (yPos >= Board.srceen_height - Board.exit_menu_buttonY - Board.exit_button_height && yPos <= Board.srceen_height - Board.exit_menu_buttonY)) {
+					if (input.isMouseButtonDown(0)) {
+						game.getState(1).init(gc, game); // reset state
+						game.enterState(0);
+					}
 				}
-			}
-			//check click exit
-			if ((xPos >= Board.exit_buttonX && xPos <= Board.exit_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.exit_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.exit_buttonY)) {
-				if (input.isMouseButtonDown(0)) {
-					gc.exit(); // exit game
+				//check click exit
+				if ((xPos >= Board.exit_buttonX && xPos <= Board.exit_buttonX + Board.exit_button_width) && (yPos >= Board.srceen_height - Board.exit_buttonY - Board.exit_button_height && yPos <= Board.srceen_height - Board.exit_buttonY)) {
+					if (input.isMouseButtonDown(0)) {
+						gc.exit(); // exit game
+					}
 				}
 			}
 		}
-		// continue moving
-		else{
+		// check score before moving else continue moving
+		else if(pac.score>=Board.win_condition){
+			gameoverX = Board.win_imgX;
+			gameoverY = Board.win_imgY;
+			int xPos = Mouse.getX();
+			int yPos = Mouse.getY();
+			//check click on win
+			if ((xPos >= Board.win_buttonX && xPos <= Board.win_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.win_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.win_buttonY)) {
+				if (input.isMouseButtonDown(0)) {
+					game.getState(1).init(gc, game); // reset state
+					game.enterState(0);
+				}
+			}
+		}else{
 			// pac's movements
 			pac.moves(input, delta);
 			// ghosts's movements
@@ -131,7 +160,8 @@ public class Play extends BasicGameState{
 
 		return false;
 	}
-	public void drawexit(Graphics g){
+	/////////////////////////////////////////////////////////////////
+	private void drawexit(Graphics g){
 		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)){
 			gameover.draw(gameoverX,gameoverY);
 			g.setColor(Color.black);
@@ -179,7 +209,32 @@ public class Play extends BasicGameState{
 		}
 		return isCollide;
 	}
-	// Check eat food
+	/////////////////////////////////////////////////////////////////////////
+	public void drawwin(Graphics g){
+		if(pac.score!=Board.win_condition)
+			return;
+			// try to be in the middle
+			win_img.draw(gameoverX,gameoverY);
+			// draw exit game
+			g.setColor(Color.black);
+			g.fill(winbutton);
+			g.setLineWidth(20);
+			g.setColor(Color.cyan);
+			g.draw(winbutton);
+			int xPos = Mouse.getX();
+			int yPos = Mouse.getY();
+			if ((xPos >= Board.win_buttonX && xPos <= Board.win_buttonX+Board.exit_button_width) && (yPos >= Board.srceen_height-Board.win_buttonY-Board.exit_button_height && yPos <= Board.srceen_height-Board.win_buttonY)) {
+				g.setColor(Color.yellow);
+				g.drawString(win, Board.win_buttonX+100, Board.win_buttonY+25);
+			}
+			else
+			{
+				g.setColor(Color.white);
+				g.drawString(win, Board.win_buttonX+100, Board.win_buttonY+25);
+				// draw "exit" String in the middle of rec
+			}
+			g.setColor(Color.white);
+	}
 
 
 

@@ -47,4 +47,7 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 + debug pac moves half into wall
 + increase size of score's string
 
-
+29/5/2019 (duc)
++ add lives to pac
++ add win condition in size class
++ draw win

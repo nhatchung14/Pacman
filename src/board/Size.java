@@ -20,7 +20,13 @@ public class Size {
     public int exit_menu_buttonX=exit_title_x+100,exit_menu_buttonY=exit_title_y+400;
     public int exit_buttonX=exit_title_x+600,exit_buttonY=exit_title_y+400;
 
-
+    // win
+    public int win_button_width=300,win_button_height=100;
+    public int win_imgX=575,win_imgY=200;
+    public int win_buttonX=win_imgX, win_buttonY= win_imgY+310;
+    ///
+    public int win_condition=1000;
+//////////////////////////////////////////////////////////////////
     public int[][] board_matrix = new int[18][30];
 
     // private constructor restricted to this class itself
