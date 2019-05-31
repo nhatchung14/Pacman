@@ -25,7 +25,7 @@ public class Size {
     public int win_imgX=575,win_imgY=200;
     public int win_buttonX=win_imgX, win_buttonY= win_imgY+310;
     ///
-    public int win_condition=1000;
+    public int win_condition=3000;
 //////////////////////////////////////////////////////////////////
     public int[][] board_matrix = new int[18][30];
 
