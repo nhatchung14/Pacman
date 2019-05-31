@@ -51,3 +51,7 @@ https://docs.google.com/spreadsheets/d/1gNfETNjBnMIQNVFBpMwqmsuZFFt6qmn2TH3hL11h
 + add lives to pac
 + add win condition in size class
 + draw win
+
+31/5/2019 (Nhat)
++ Cleaned the workspace
++ Added runnable .jar file
