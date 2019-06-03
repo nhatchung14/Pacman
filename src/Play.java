@@ -20,10 +20,7 @@ public class Play extends BasicGameState{
 
 	Pacman pac; // Pacman
 
-	Ghost ghostBlue;
-	Ghost ghostBrown;
-	Ghost ghostRed;
-	Ghost ghostYellow;
+	Ghost [] ghosts;
 
 	//exit window;
 	public Shape menubutton,exitbutton,winbutton;
@@ -52,10 +49,11 @@ public class Play extends BasicGameState{
 		pac = new Pacman("image/pacman/", ".png");
 
 		//ghost part
-		ghostBlue 	= GhostFactory.newGhost("image/","blue",	".png", 75, 75);
-		ghostYellow = GhostFactory.newGhost("image/","yellow",	".png", 475, 825);
-		ghostRed 	= GhostFactory.newGhost("image/","red",		".png", 825, 1025);
-		ghostBrown 	= GhostFactory.newGhost("image/","brown",	".png", 210, 1331);
+		ghosts = new Ghost[4];
+		ghosts[0] 	= GhostFactory.newGhost("image/","blue",	".png", 75, 75);
+		ghosts[1]   = GhostFactory.newGhost("image/","yellow",	".png", 475, 825);
+		ghosts[2] 	= GhostFactory.newGhost("image/","red",		".png", 825, 1025);
+		ghosts[3] 	= GhostFactory.newGhost("image/","brown",	".png", 210, 1331);
 
 
 		// declare exit window with 2 button, draw outside first if collie then change pos to inside screen
@@ -80,10 +78,8 @@ public class Play extends BasicGameState{
 		Food.drawFood(pac.getX(), pac.getY(), pac);
 		
 		// draw ghost
-		ghostBlue.draw();
-		ghostRed.draw();
-		ghostBrown.draw();
-		ghostYellow.draw();
+		for (int i = 0; i < 4; i++)
+			ghosts[i].draw();
 
 		// score
         g.setColor(Color.white);
@@ -102,7 +98,7 @@ public class Play extends BasicGameState{
 	public void update(GameContainer gc, StateBasedGame game, int delta) throws SlickException {
 		Input input = gc.getInput();
 		// check pos before move
-		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)) {
+		if (checkWithAllGhost(pac,ghosts[0],ghosts[1],ghosts[2],ghosts[3])) {
 			// check pac's lives first
 			if (pac.lives!=0) {
 			pac.lives--;
@@ -146,10 +142,8 @@ public class Play extends BasicGameState{
 			// pac's movements
 			pac.moves(input, delta);
 			// ghosts's movements
-			ghostBrown.moves(pac,delta);
-			ghostBlue.moves(pac,delta);
-			ghostRed.moves(pac,delta);
-			ghostYellow.moves(pac,delta);
+			for (int i = 0; i < 4; i++)
+				ghosts[i].moves(pac, delta);
 		}
 	}
 	// check with all ghost, 4 funct of checkedCollidePacman
@@ -162,7 +156,7 @@ public class Play extends BasicGameState{
 	}
 	/////////////////////////////////////////////////////////////////
 	private void drawexit(Graphics g){
-		if (checkWithAllGhost(pac,ghostBrown,ghostBlue,ghostRed,ghostYellow)){
+		if (checkWithAllGhost(pac,ghosts[0],ghosts[1],ghosts[2],ghosts[3])){
 			gameover.draw(gameoverX,gameoverY);
 			g.setColor(Color.black);
 			g.fill(menubutton); //fill background of "menubutton" rec = black

@@ -49,8 +49,8 @@ public class Pacman {
 		// pac's movements
 		if (input.isKeyDown(Input.KEY_UP)) {
 			pac = pacUp;
-			// consider the rear of the image pacPosY-25  instead of the center pacPoY
-			y = (int) ((pacPosY-25 - delta * 0.25f)/50.0f); // next y position
+			// consider the rear of the image pacPosY-10  instead of the center pacPoY
+			y = (int) ((pacPosY-10 - delta * 0.25f)/50.0f); // next y position
 			x = (int) ((pacPosX)/50.0f);
 
 			// if Pacman's next expected position is out of bounds or blocked
@@ -60,8 +60,8 @@ public class Pacman {
 		}
 		if (input.isKeyDown(Input.KEY_DOWN)) {
 			pac = pacDown;
-			// consider the rear of the image pacPosY+25  instead of the center pacPoY
-			y = (int) ((pacPosY+25 + delta * 0.25f)/50.0f);  // next y position
+			// consider the rear of the image pacPosY+10  instead of the center pacPoY
+			y = (int) ((pacPosY+10 + delta * 0.25f)/50.0f);  // next y position
 			x = (int) ((pacPosX)/50.0f);
 
 			// if Pacman's next expected position is out of bounds or blocked
@@ -71,9 +71,9 @@ public class Pacman {
 		}
 		if (input.isKeyDown(Input.KEY_LEFT)) {
 			pac = pacLeft;
-			// consider the rear of the image pacPosX-25  instead of the center pacPoX
+			// consider the rear of the image pacPosX-10  instead of the center pacPoX
 			y = (int) ((pacPosY)/50.0f);
-			x = (int) ((pacPosX-25 - delta * 0.25f)/50.0f); // next x position
+			x = (int) ((pacPosX-10 - delta * 0.25f)/50.0f); // next x position
 
 			// if Pacman's next expected position is out of bounds or blocked
 			if (pacPosX > 0 && x >= 0 && !Utils.isBlocked(y, x)) {
@@ -82,9 +82,9 @@ public class Pacman {
 		}
 		if (input.isKeyDown(Input.KEY_RIGHT)) {
 			pac = pacRight;
-			// consider the rear of the image pacPosX+25  instead of the center pacPoX
+			// consider the rear of the image pacPosX+10  instead of the center pacPoX
 			y = (int) ((pacPosY)/50.0f);
-			x = (int) ((pacPosX+25 + delta * 0.25f)/50.0f); // next x position
+			x = (int) ((pacPosX+10 + delta * 0.25f)/50.0f); // next x position
 
 			// if Pacman's next expected position is out of bounds or blocked
 			if (pacPosX < 1500 && x < 30 && !Utils.isBlocked(y, x)) {
